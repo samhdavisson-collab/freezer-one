@@ -53,7 +53,7 @@ s3 = boto3.client(
 )
 
 BUCKET = st.secrets["R2_BUCKET"]
-BASE_URL = "localhost:8501"#"table-finder.streamlit.app" #replace later!!!
+BASE_URL = "freezerone.streamlit.app" #replace later!!!
 # setup_session_state("page", "home")
 
 setup_session_state("guest_tab_state", "Add Food")
