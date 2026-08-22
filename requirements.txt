@@ -1,0 +1,7 @@
+pandas~=3.0.5
+streamlit~=1.61.1
+boto3~=1.43.72
+qrcode~=8.2
+opencv-python~=5.0.0.93
+numpy~=2.5.2
+requests~=2.34.2
