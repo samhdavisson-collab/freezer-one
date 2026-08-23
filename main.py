@@ -122,8 +122,9 @@ if not "fid" in st.query_params:
                     st.query_params["cid"] = file["cid"]
                 st.query_params["fid"] = file["fid"]
                 st.rerun()
-            except:
+            except Exception as e:
                 st.error("Invalid file uploaded!")
+                e
                 file
     with hometabs[2]:
         st.write("welcome")
