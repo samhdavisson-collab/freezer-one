@@ -112,7 +112,19 @@ if not "fid" in st.query_params:
             st.session_state.totoastemoji = ":material/task_alt:"
             st.rerun()
     with hometabs[1]:
-        st.write("welcome")
+        st.write("Hello!")
+        st.write("Here you can go back to your Freezer Admin or Freezer Guest page.")
+        gobackfile = st.file_uploader("Upload your Recover file", type="json")
+        if gobackfile:
+            file = json.load(gobackfile)
+            try:
+                if file["access"] == "admin":
+                    st.query_params["cid"] = file["cid"]
+                st.query_params["fid"] = file["fid"]
+                st.rerun()
+            except:
+                st.error("Invalid file uploaded!")
+                file
     with hometabs[2]:
         st.write("welcome")
 elif "cid" in st.query_params:
@@ -127,7 +139,7 @@ elif "cid" in st.query_params:
     fname = fmeta["name"]
     if cid == fmeta["cid"]:
         st.header(f"This is the {fname} Creator Page.")
-        creatortabs = st.tabs(["Add Categories", "Add Food", "Adjust Amounts", "Share Freezer", "Edit Freezer"])
+        creatortabs = st.tabs(["Add Categories", "Add Food", "Adjust Amounts", "Share Freezer", "Edit Freezer", "Download Recover Files"])
         with creatortabs[0]:
             category = st.text_input(f"What is the category's name?")
             if st.button("Add Category!", width="stretch", type="primary"):
@@ -208,8 +220,8 @@ elif "cid" in st.query_params:
                         }
                         update_s3(categories)
         with creatortabs[3]:
-            guest_url = BASE_URL + f"?fid={fid}"
-            admin_url = BASE_URL + f"?fid={fid}&cid={cid}"
+            guest_url = BASE_URL + f"/?fid={fid}"
+            admin_url = BASE_URL + f"/?fid={fid}&cid={cid}"
             qr = qrcode.make(guest_url)
             buf = io.BytesIO()
             qr.save(buf, format="PNG")
@@ -267,6 +279,13 @@ elif "cid" in st.query_params:
                     st.session_state.totoast = "Category renamed!"
                     st.session_state.totoastemoji = ":material/check:"
                     st.rerun()
+        with creatortabs[5]:
+            st.write("Download these files and share them to share your freezer or recover it if you close the tab!")
+            guestdata = json.dumps({"access":"guest","fid":fid})
+            admindata = json.dumps({"access":"admin","fid":fid,"cid":cid})
+            with st.container(horizontal=True):
+                st.download_button("Guest file", guestdata, width="stretch", mime="application/json", type="primary")
+                st.download_button("Admin file", admindata, width="stretch", mime="application/json", type="primary")
     else:
         st.error(f"Incorrect Freezer Creator ID!")
 else:
