@@ -329,7 +329,7 @@ if not "fid" in st.query_params:
                     - Download your QR code, print it out, and attach it to your freezer!
                         - Whenever you do anything to your Freezer, you can scan it to add or use your food.
                     - Also, you can copy the Creator or Guest links and share them.""")
-            with st.expander("**Edit Freezer Information**", type="compact"):
+            with st.expander("**Edit Freezer Info**", type="compact"):
                 st.markdown("""
                     - *This page is not to be confused with "Edit Inventory".*
                     - Here you can rename your Freezer and categories.""")
@@ -382,7 +382,7 @@ if not "fid" in st.query_params:
             #     - Whenever you do anything to your Freezer, you can scan it to add or use your food.
             # - Also, you can copy the Creator or Guest links and share them.
             #
-            # **Edit Freezer Information**
+            # **Edit Freezer Info**
             # - *This page is not to be confused with "Edit Inventory".*
             # - Here you can rename your Freezer and categories.
             #
@@ -419,7 +419,7 @@ else:
     if st.session_state.get("tab_state"):
         st.session_state.creatortabkey = uuid.uuid4().hex
     creatortabs = st.tabs(
-        ["Add Food", "Use Food", "Edit Inventory", "Scan Barcode", "Share Freezer", "Edit Freezer Information",
+        ["Add Food", "Use Food", "Edit Inventory", "Scan Barcode", "Share Freezer", "Edit Freezer Info",
          "Download Recover Files"] if cid == fmeta["cid"] else ["Add Food", "Use Food", "View Inventory",
                                                                 "Scan Barcode"], key=st.session_state.creatortabkey,
         default=temptabstate)
