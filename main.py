@@ -740,9 +740,9 @@ else:
                         st.rerun()
             with st.container(horizontal=True, vertical_alignment="bottom"):
                 "Replace"
-                old = st.selectbox("", list(categories.keys()))
+                old = st.selectbox("N/A", list(categories.keys()), label_visibility="collapsed")
                 "with"
-                new = st.text_input("")
+                new = st.text_input("N/A", label_visibility="collapsed")
                 new = better_title(new)
                 if st.button("Replace", type="primary", width="stretch") and new:
                     fmeta["items"][new] = fmeta["items"][old]
